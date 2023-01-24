@@ -27,7 +27,7 @@ pub fn problem_one_closed_form(n: i32) -> i32 {
     multiples_of_three + multiples_of_five - multiples_of_fifteen
 }
 
-#[cfg(target_arch="aarch64")]
+#[cfg(target_arch = "aarch64")]
 fn sum_of_multiples_asm(n: u32, divisor: u32) -> u32 {
     let mut result: u32 = n;
     let divide_mul: u32 = divisor;
