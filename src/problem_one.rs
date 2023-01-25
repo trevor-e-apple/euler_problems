@@ -53,18 +53,15 @@ fn sum_of_multiples_asm(n: u32, divisor: u32) -> u32 {
     let divide_mul: u32 = divisor;
     unsafe {
         asm!(
-            "mov eax, {result:e}",
-            "mov ebx, {divide_mul:e}",
             "xor edx, edx", // clear edx register before div
-            "div ebx", // n = result / divisor
+            "div r8", // n = result / divisor
             "mov ecx, eax", // store n in ecx
             "mul eax", // n ^ 2
             "add eax, ecx", // n ^ 2 + n
             "shr eax, 1", // (n ^ 2  + n) / 2
-            "mul ebx", // eax = multiple * triangle_num
-            "mov {result:e}, eax",
-            divide_mul = in(reg) divide_mul,
-            result = inout(reg) result
+            "mul r8", // eax = multiple * triangle_num
+            in("r8") divide_mul,
+            inout("eax") result
         );
     }
 
